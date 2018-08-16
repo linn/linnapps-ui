@@ -1,0 +1,59 @@
+﻿@page
+@model Service.Host.Pages.Products.SaCoreTypes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>SaCoreType</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SaCoreType.Description" class="control-label"></label>
+                <input asp-for="SaCoreType.Description" class="form-control" />
+                <span asp-validation-for="SaCoreType.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaCoreType.DateInvalid" class="control-label"></label>
+                <input asp-for="SaCoreType.DateInvalid" class="form-control" />
+                <span asp-validation-for="SaCoreType.DateInvalid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaCoreType.InsertType" class="control-label"></label>
+                <input asp-for="SaCoreType.InsertType" class="form-control" />
+                <span asp-validation-for="SaCoreType.InsertType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaCoreType.TriggerLevel" class="control-label"></label>
+                <input asp-for="SaCoreType.TriggerLevel" class="form-control" />
+                <span asp-validation-for="SaCoreType.TriggerLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaCoreType.LookaheadDays" class="control-label"></label>
+                <input asp-for="SaCoreType.LookaheadDays" class="form-control" />
+                <span asp-validation-for="SaCoreType.LookaheadDays" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaCoreType.SortOrder" class="control-label"></label>
+                <input asp-for="SaCoreType.SortOrder" class="form-control" />
+                <span asp-validation-for="SaCoreType.SortOrder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
