@@ -1,0 +1,58 @@
+﻿@page
+@model Service.Host.Pages.Products.SaCoreTypes.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SaCoreType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SaCoreType.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaCoreType.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaCoreType.DateInvalid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaCoreType.DateInvalid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaCoreType.InsertType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaCoreType.InsertType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaCoreType.TriggerLevel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaCoreType.TriggerLevel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaCoreType.LookaheadDays)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaCoreType.LookaheadDays)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaCoreType.SortOrder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaCoreType.SortOrder)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="SaCoreType.CoreType" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

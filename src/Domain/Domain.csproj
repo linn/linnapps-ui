@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Linn.LinnappsUi.Domain</AssemblyName>
+    <RootNamespace>Linn.LinnappsUi.Domain</RootNamespace>
+  </PropertyGroup>
+
+</Project>

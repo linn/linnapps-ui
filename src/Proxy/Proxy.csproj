@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Linn.LinnappsUi.Proxy</AssemblyName>
+    <RootNamespace>Linn.LinnappsUi.Proxy</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Linn.Common.Proxy" Version="3.0.1" />
+  </ItemGroup>
+
+</Project>

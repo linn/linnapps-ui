@@ -1,0 +1,65 @@
+﻿@page
+@model Service.Host.Pages.Products.SaCoreTypes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Sa Core Types</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SaCoreType[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaCoreType[0].DateInvalid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaCoreType[0].InsertType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaCoreType[0].TriggerLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaCoreType[0].LookaheadDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaCoreType[0].SortOrder)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.SaCoreType) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateInvalid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsertType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TriggerLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LookaheadDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SortOrder)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.CoreType">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.CoreType">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
