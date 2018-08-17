@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.570" />
     <PackageReference Include="linn.common.configuration" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
