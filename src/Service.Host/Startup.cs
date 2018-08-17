@@ -30,7 +30,8 @@ namespace Linn.LinnappsUi.Service.Host
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<ServiceDbContext>(options => options.UseOracle(this.GetConnectionString()));
         }
 
