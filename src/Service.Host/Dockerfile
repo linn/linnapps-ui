@@ -9,4 +9,4 @@ COPY bin/release/netcoreapp2.1/publish/ /app/bin/
 ENV APP_PATH /app/
 ENV GIT_BRANCH $gitBranch
 
-CMD dotnet /app/bin/Linn.LinnappUi.Service.Host.dll
+CMD dotnet /app/bin/Linn.LinnappsUi.Service.Host.dll
