@@ -1,5 +1,4 @@
-﻿FROM microsoft/2.1-aspnetcore-runtime
-
+﻿FROM microsoft/dotnet:2.1-aspnetcore-runtime
 ARG gitBranch=unspecified
 
 EXPOSE 5050
