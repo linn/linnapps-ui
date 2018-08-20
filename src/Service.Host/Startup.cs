@@ -80,8 +80,11 @@ namespace Linn.LinnappsUi.Service.Host
             var userId = ConfigurationManager.Configuration["DATABASE_USER_ID"];
             var password = ConfigurationManager.Configuration["DATABASE_PASSWORD"];
             var databasePort = ConfigurationManager.Configuration["DATABASE_PORT"];
-
-            return $"Server={host};Port={databasePort};Sid={databaseName};UserId={userId};Password={password};License Key=trial:./devart.data.oracle.key";
+#if DEBUG
+            return $"Server={host};Port={databasePort};Sid={databaseName};UserId={userId};Password={password}";
+#else
+            return $"Server={host};Port={databasePort};Sid={databaseName};UserId={userId};Password={password};License Key=trial:/app/bin/devart.data.oracle.key";
+#endif
         }
     }
 }
