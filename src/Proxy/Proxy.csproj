@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="linn.common.configuration" Version="2.0.0" />
     <PackageReference Include="Linn.Common.Proxy" Version="3.0.1" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
   </ItemGroup>
