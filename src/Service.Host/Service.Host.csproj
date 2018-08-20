@@ -35,4 +35,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="devart.data.oracle.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
