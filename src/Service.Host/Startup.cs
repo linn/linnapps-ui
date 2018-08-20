@@ -46,6 +46,7 @@ namespace Linn.LinnappsUi.Service.Host
             containerBuilder.RegisterModule<AmazonCredentialsModule>();
             containerBuilder.RegisterModule<AmazonSqsModule>();
             containerBuilder.RegisterModule<LoggingModule>();
+            containerBuilder.RegisterModule<ServiceModule>();
             containerBuilder.Populate(services);
             var container = containerBuilder.Build();
             return new AutofacServiceProvider(container);
