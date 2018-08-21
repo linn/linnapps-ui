@@ -31,13 +31,13 @@
             return thing.Value.ToString();
         }
 
-
         private string GetConnectionString()
         {
             var host = ConfigurationManager.Configuration["DATABASE_HOST"];
             var userId = ConfigurationManager.Configuration["DATABASE_USER_ID"];
             var password = ConfigurationManager.Configuration["DATABASE_PASSWORD"];
-            return $"Data Source={host};User Id={userId};Password={password}";
+
+            return $"user id={userId}; password={password}; data source={host}";
         }
     }
 }
