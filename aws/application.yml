@@ -25,9 +25,6 @@ Parameters:
   databasePassword:
     Type: String
     Description: Database password
-  databasePort:
-    Type: String
-    Description: Database port
   rabbitServer:
     Type: String
     Description: Rabbit server
@@ -100,8 +97,6 @@ Resources:
           Value: !Ref databaseUserId
         - Name: DATABASE_PASSWORD
           Value: !Ref databasePassword
-        - Name: DATABASE_PORT
-          Value: !Ref databasePort
         - Name: RABBIT_SERVER
           Value: !Ref rabbitServer
         - Name: RABBIT_PORT

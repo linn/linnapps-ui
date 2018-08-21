@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Modules\**" />
+    <Compile Remove="ResponseProcessors\**" />
+    <EmbeddedResource Remove="Modules\**" />
+    <EmbeddedResource Remove="ResponseProcessors\**" />
+    <None Remove="Modules\**" />
+    <None Remove="ResponseProcessors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Linn.Common.Configuration" Version="2.0.0" />
     <PackageReference Include="Linn.Common.Nancy.Facade" Version="2.0.1" />
     <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
@@ -19,8 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\" />
-    <Folder Include="ResponseProcessors\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
