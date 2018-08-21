@@ -1,0 +1,76 @@
+﻿@page
+@model Linn.LinnappsUi.Service.Host.Pages.Logistics.StockPools.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPools[0].BridgeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPools[0].StockPoolCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPools[0].StockPoolDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPools[0].DateInvalid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPools[0].AccountingCompany)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPools[0].Sequence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPools[0].StockCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockPools[0].DefaultLocation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.StockPools) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BridgeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockPoolCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockPoolDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateInvalid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountingCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sequence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultLocation)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.BridgeId">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
