@@ -1,0 +1,39 @@
+﻿@page
+@model Linn.LinnappsUi.Service.Host.Pages.Logistics.StockPools.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Stock Pool</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.stockPool.BridgeId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.stockPool.StockPoolCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.stockPool.StockPoolDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.stockPool.DateInvalid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.stockPool.StockCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.stockPool.Sequence)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.stockPool.AccountingCompany)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.stockPool.DefaultLocation)
+        </dd>
+    </dl>
+</div>
