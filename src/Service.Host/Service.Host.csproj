@@ -34,6 +34,9 @@
     <Content Update="Pages\linnapps-ui\Logistics\StockPools\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Pages\linnapps-ui\Products\EanCodesReport.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\linnapps-ui\Thing.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

@@ -19,5 +19,7 @@
         public DateTime? PhaseInDate { get; set; }
 
         public DateTime? PhaseOutDate { get; set; }
+
+        public string CartonType { get; set; }
     }
 }

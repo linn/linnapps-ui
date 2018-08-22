@@ -6,6 +6,6 @@
 
     public interface IEanCodeReportService
     {
-        IEnumerable<EanCodeReport> GetEanCodeReport(bool includePhasedOut = false);
+        IEnumerable<EanCodeReport> GetEanCodeReport(bool includePhasedOut = false, bool cartonisedOnly = false);
     }
 }

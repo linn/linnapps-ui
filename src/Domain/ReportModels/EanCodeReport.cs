@@ -6,6 +6,10 @@
 
         public string ArticleDescription { get; set; }
 
-        public string CoreTypeDescription { get; set; }
+        public string EanCode { get; set; }
+
+        public string LabelDescripton1 { get; set; }
+
+        public string PackingDescription { get; set; }
     }
 }

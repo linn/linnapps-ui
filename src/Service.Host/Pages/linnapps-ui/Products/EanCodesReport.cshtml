@@ -1,0 +1,59 @@
+﻿@page
+@model Linn.LinnappsUi.Service.Host.Pages.Products.EanCodesReportModel
+@{
+    ViewData["Title"] = "Ean Codes";
+}
+
+<h2>EAN Codes Report</h2>
+
+<form method="post">
+    <p>
+        <div class="row">Include Phased Out: <input type="checkbox" asp-for="IncludePhasedOut" @(Html.Raw(Model.IncludePhasedOut ? "checked=\"checked\"" : "")) name="includePhasedOut"></div>
+        <div class="row">Cartonised Only: <input asp-for="CartonisedOnly" type="checkbox" @(Html.Raw(Model.CartonisedOnly ? "checked=\"checked\"" : "")) name="cartonisedOnly"></div>
+        <div class="row"><input type="submit" value="Run Report" /></div>
+</p>
+</form>
+
+<table class=" table table-condensed table-bordered small table-striped">
+    <thead>
+    <tr>
+        <th>
+           Article Number
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Ean Code
+        </th>
+        <th>
+            Label Description
+        </th>
+        <th>
+            Packing Description
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.ReportData) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EanCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LabelDescripton1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PackingDescription)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

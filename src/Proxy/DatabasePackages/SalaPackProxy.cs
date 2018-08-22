@@ -24,10 +24,9 @@
                             };
             cmd.Parameters.Add(desc);
 
-            var article = new OracleParameter(string.Empty, OracleDbType.Varchar2)
+            var article = new OracleParameter(articleNumber, OracleDbType.Varchar2)
                            {
                                Direction = ParameterDirection.Input,
-                               Value = articleNumber,
                                Size = 14
                            };
             cmd.Parameters.Add(article);
@@ -36,7 +35,7 @@
             cmd.ExecuteNonQuery();
             connection.Close();
 
-            return desc.Value.ToString();
+            return desc.Value != null && desc.Value.ToString() != "null" ? desc.Value.ToString() : string.Empty;
         }
     }
 }
