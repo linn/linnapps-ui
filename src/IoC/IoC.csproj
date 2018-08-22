@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Messaging\Messaging.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
     <ProjectReference Include="..\Proxy\Proxy.csproj" />
+    <ProjectReference Include="..\Service\Service.csproj" />
   </ItemGroup>
 
 </Project>

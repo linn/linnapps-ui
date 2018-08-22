@@ -1,0 +1,39 @@
+﻿@page
+@model Linn.LinnappsUi.Service.Host.Pages.Products.SaCoreTypes.CoreTypeBySalesArticleModel
+@{
+    ViewData["Title"] = "Core Types By Sales Article";
+}
+
+<h2>Current Sales Articles With Core Type</h2>
+
+<table class=" table table-condensed table-bordered small table-striped">
+    <thead>
+    <tr>
+        <th>
+           Article Number
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Core Type
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.SalesArticleCoreTypes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoreTypeDescription)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
