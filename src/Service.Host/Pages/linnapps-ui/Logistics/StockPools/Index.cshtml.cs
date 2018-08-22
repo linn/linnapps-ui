@@ -21,7 +21,7 @@
 
         public void OnGet()
         {
-            this.StockPools = this.stockPoolService.GetStockPools().ToList();
+            this.StockPools = this.stockPoolService.GetStockPools().OrderBy(b => b.StockPoolCode).ToList();
         }
     }
 }
