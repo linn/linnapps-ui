@@ -2,8 +2,8 @@
 {
     using System.Data;
 
-    using Linn.Common.Configuration;
     using Linn.LinnappsUi.Domain.RemoteServices;
+    using Linn.LinnappsUi.Persistence;
 
     using Oracle.ManagedDataAccess.Client;
 
@@ -11,7 +11,7 @@
     {
         public string GetThing()
         {
-            var connection = new OracleConnection(this.GetConnectionString());
+            var connection = new OracleConnection(ConnectionStrings.ManagedConnectionString());
             var cmd = new OracleCommand("get_thing", connection)
                           {
                               CommandType = CommandType.StoredProcedure
@@ -29,15 +29,6 @@
             connection.Close();
 
             return thing.Value.ToString();
-        }
-
-        private string GetConnectionString()
-        {
-            var host = ConfigurationManager.Configuration["DATABASE_HOST"];
-            var userId = ConfigurationManager.Configuration["DATABASE_USER_ID"];
-            var password = ConfigurationManager.Configuration["DATABASE_PASSWORD"];
-
-            return $"user id={userId}; password={password}; data source={host}";
         }
     }
 }
