@@ -4,11 +4,11 @@
 
     using Linn.Common.Configuration;
     using Linn.Common.Proxy;
-    using Linn.LinnappsUi.Domain.Packages;
+    using Linn.LinnappsUi.Domain.DatabasePackages;
     using Linn.LinnappsUi.Domain.RemoteServices;
     using Linn.LinnappsUi.Domain.Reports;
     using Linn.LinnappsUi.Proxy;
-    using Linn.LinnappsUi.Proxy.Packages;
+    using Linn.LinnappsUi.Proxy.DatabasePackages;
     using Linn.LinnappsUi.Service.Reports;
 
     public class ServiceModule : Module
