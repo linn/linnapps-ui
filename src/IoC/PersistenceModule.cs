@@ -1,15 +1,15 @@
 ﻿namespace Linn.LinnappsUi.IoC
 {
-    using Amazon.SQS;
     using Autofac;
 
-    using Linn.Common.Logging;
-    using Linn.Common.Logging.AmazonSqs;
+    using Linn.LinnappsUi.Domain.Repositories;
+    using Linn.LinnappsUi.Persistence.Repositories;
 
     public class PersistenceModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<SalesArticleRepository>().As<ISalesArticleRepository>();
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Linn.LinnappsUi.Service.Host
                     {
                         options.Conventions.AllowAnonymousToFolder("/linnapps-ui");
                     });
-            services.AddDbContext<ServiceDbContext>(options => options.UseOracle(this.GetConnectionString()));
+            services.AddDbContext<ServiceDbContext>(options => options.UseOracle(this.GetEntityFrameworkConnectionString()));
 
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
@@ -62,6 +62,7 @@ namespace Linn.LinnappsUi.Service.Host
             containerBuilder.RegisterModule<AmazonSqsModule>();
             containerBuilder.RegisterModule<LoggingModule>();
             containerBuilder.RegisterModule<ServiceModule>();
+            containerBuilder.RegisterModule<PersistenceModule>();
             containerBuilder.Populate(services);
             var container = containerBuilder.Build();
             return new AutofacServiceProvider(container);
@@ -92,7 +93,7 @@ namespace Linn.LinnappsUi.Service.Host
             app.UseMvc();
         }
 
-        private string GetConnectionString()
+        private string GetEntityFrameworkConnectionString()
         {
             var host = ConfigurationManager.Configuration["DATABASE_HOST"];
             var databaseName = ConfigurationManager.Configuration["DATABASE_NAME"];
