@@ -14,6 +14,7 @@
     <PackageReference Include="autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
     <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.570" />
+    <PackageReference Include="Linn.Common.Authentication.Host" Version="1.0.2" />
     <PackageReference Include="linn.common.configuration" Version="2.0.0" />
     <PackageReference Include="linn.common.logging" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />

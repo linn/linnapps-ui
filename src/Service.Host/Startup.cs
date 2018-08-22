@@ -1,10 +1,12 @@
 namespace Linn.LinnappsUi.Service.Host
 {
     using System;
+    using System.IdentityModel.Tokens.Jwt;
 
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
 
+    using Linn.Common.Authentication.Host.Extensions;
     using Linn.Common.Configuration;
     using Linn.LinnappsUi.IoC;
     using Linn.LinnappsUi.Persistence;
@@ -37,8 +39,21 @@ namespace Linn.LinnappsUi.Service.Host
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services.AddLinnAuthentication(
+                options =>
+                    {
+                        options.Authority = ConfigurationManager.Configuration["AUTHORITY_URI"];
+                        options.CallbackPath = new PathString("/linnapps-ui/signin-oidc");
+                    });
+
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddRazorPagesOptions(options =>
+                    {
+                        options.Conventions.AllowAnonymousToFolder("/linnapps-ui");
+                    });
             services.AddDbContext<ServiceDbContext>(options => options.UseOracle(this.GetConnectionString()));
 
             // Add Autofac
@@ -70,6 +85,9 @@ namespace Linn.LinnappsUi.Service.Host
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
+            app.UseBearerTokenAuthentication();
 
             app.UseMvc();
         }
