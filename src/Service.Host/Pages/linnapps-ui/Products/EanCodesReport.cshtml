@@ -8,9 +8,15 @@
 
 <form method="post">
     <p>
-        <div class="row">Include Phased Out: <input type="checkbox" asp-for="IncludePhasedOut" @(Html.Raw(Model.IncludePhasedOut ? "checked=\"checked\"" : "")) name="includePhasedOut"></div>
-        <div class="row">Cartonised Only: <input asp-for="CartonisedOnly" type="checkbox" @(Html.Raw(Model.CartonisedOnly ? "checked=\"checked\"" : "")) name="cartonisedOnly"></div>
-        <div class="row"><input type="submit" value="Run Report" /></div>
+        <div class="row">
+            <div class="col-sm-3"> Include Phased Out: <input type="checkbox" asp-for="IncludePhasedOut" @(Html.Raw(Model.IncludePhasedOut ? "checked=\" checked\"" : "" )) name="includePhasedOut"></div>
+            <div class="col-sm-4">Cartonised Only: <input asp-for="CartonisedOnly" type="checkbox" @(Html.Raw(Model.CartonisedOnly ? "checked=\" checked\"" : "" )) name="cartonisedOnly"></div>
+           
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6"><input type="submit" value="Run Report" /> <input type="submit" asp-page-handler="DownloadFile" value="Export to Csv" /></div>
+        </div>
 </p>
 </form>
 
