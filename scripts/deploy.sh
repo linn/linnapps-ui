@@ -20,7 +20,7 @@ if [ "${TRAVIS_BRANCH}" = "master" ]; then
     APP_ROOT=http://app.linn.co.uk
     PROXY_ROOT=http://app.linn.co.uk
 	ENV_SUFFIX=
-    DESIRED_COUNT=2
+    DESIRED_COUNT=1
   else
     # pull request based on master - deploy to sys
     echo deploy to sys
