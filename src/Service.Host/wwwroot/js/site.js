@@ -2,3 +2,22 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your Javascript code.
+
+$(document).ready(function() {
+    $("#SelectedSalesArticle").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: '/linnapps-ui/products/salesarticles/search',
+                type: 'GET',
+                dataType: "json",
+                data: { searchTerm : request.term },
+                success: function(data) {
+                    response($.map(data,
+                        function(item) {
+                            return { label : item.label, value: item.value }
+                        }))}
+                });
+        }
+        
+    });
+})

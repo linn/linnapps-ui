@@ -1,0 +1,22 @@
+﻿@page
+@model Linn.LinnappsUi.Service.Host.Pages.Products.SalesArticles.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Select sales article</h2>
+
+<form method="post">
+    <div class="row">
+        <div class="col-sm-2">
+            <label class="control-label">Select sales article</label>
+        </div>
+        <div class="col-sm-3">
+            <input asp-for="SelectedSalesArticle" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <input type="submit" asp-page-handler="Select" value="View" />
+        </div>
+    </div>
+</form>

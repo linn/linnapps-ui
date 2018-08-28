@@ -1,0 +1,70 @@
+﻿@page
+@model Service.Host.Pages.linnapps_ui.Products.SalesArticles.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SalesArticle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesArticle.TypeOfSale)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesArticle.TypeOfSale)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesArticle.InvoiceDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesArticle.InvoiceDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesArticle.EanCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesArticle.EanCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesArticle.PackingDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesArticle.PackingDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesArticle.SaDiscountFamily)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesArticle.SaDiscountFamily)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesArticle.PhaseInDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesArticle.PhaseInDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesArticle.PhaseOutDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesArticle.PhaseOutDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesArticle.CartonType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesArticle.CartonType)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="SalesArticle.ArticleNumber" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

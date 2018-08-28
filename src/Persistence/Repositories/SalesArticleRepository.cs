@@ -22,6 +22,12 @@
                 .SingleOrDefault(s => s.ArticleNumber == articleNumber);
         }
 
+        public IEnumerable<SalesArticle> SearchByNameAndDescription(string searchTerm)
+        {
+            return this.serviceDbContext.SalesArticle
+                .Where(s => s.ArticleNumber.Contains(searchTerm) || s.InvoiceDescription.Contains(searchTerm));
+        }
+
         public IEnumerable<SalesArticle> GetByDiscountFamily(string discountFamily, bool includePhasedOut = false)
         {
             return includePhasedOut

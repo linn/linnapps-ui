@@ -1,6 +1,7 @@
 ﻿namespace Linn.LinnappsUi.Domain.Products
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class SalesArticle
     {
@@ -21,5 +22,8 @@
         public DateTime? PhaseOutDate { get; set; }
 
         public string CartonType { get; set; }
+
+        [ForeignKey("SA_CORE_TYPE")]
+        public SaCoreType SaCoreType { get; set; }
     }
 }
