@@ -5,10 +5,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details of  @Html.DisplayTextFor(a => a.SalesArticle.ArticleNumber)</h2>
 
 <div>
-    <h4>SalesArticle</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -69,5 +68,5 @@
 </div>
 <div>
     <a asp-page="./EditCoreType" asp-route-id="@Model.SalesArticle.ArticleNumber">Change Core Type</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Sales Article Home</a>
 </div>

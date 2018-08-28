@@ -3,7 +3,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Linn.Common.Persistence;
     using Linn.LinnappsUi.Domain.Products;
+    using Linn.LinnappsUi.Persistence;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,11 +13,14 @@
 
     public class EditCoreTypeModel : PageModel
     {
-        private readonly Linn.LinnappsUi.Persistence.ServiceDbContext _context;
+        private readonly ServiceDbContext context;
 
-        public EditCoreTypeModel(Linn.LinnappsUi.Persistence.ServiceDbContext context)
+        private readonly ITransactionManager transactionManager;
+
+        public EditCoreTypeModel(ServiceDbContext context, ITransactionManager transactionManager)
         {
-            this._context = context;
+            this.context = context;
+            this.transactionManager = transactionManager;
         }
 
         [BindProperty]
@@ -28,12 +33,13 @@
                 return this.NotFound();
             }
 
-            this.SalesArticle = await this._context.SalesArticle.FirstOrDefaultAsync(m => m.ArticleNumber == id);
+            this.SalesArticle = await this.context.SalesArticle.FirstOrDefaultAsync(m => m.ArticleNumber == id);
 
             if (this.SalesArticle == null)
             {
                 return this.NotFound();
             }
+
             return this.Page();
         }
 
@@ -44,34 +50,18 @@
                 return this.Page();
             }
 
-            var article = await this._context.SalesArticle.FirstOrDefaultAsync(m => m.ArticleNumber == this.SalesArticle.ArticleNumber);
-            var coreType = await this._context.SaCoreType.FirstOrDefaultAsync(m => m.CoreType == this.SalesArticle.SaCoreType.CoreType);
+            var article = await this.context.SalesArticle.FirstOrDefaultAsync(m => m.ArticleNumber == this.SalesArticle.ArticleNumber);
+            var coreType = await this.context.SaCoreType.FirstOrDefaultAsync(m => m.CoreType == this.SalesArticle.SaCoreType.CoreType);
 
             article.SaCoreType = coreType;
-
-            try
-            {
-                var article2 = await this._context.SalesArticle.FirstOrDefaultAsync(m => m.ArticleNumber == this.SalesArticle.ArticleNumber);
-                await this._context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!this.SalesArticleExists(this.SalesArticle.ArticleNumber))
-                {
-                    return this.NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            this.transactionManager.Commit();
 
             return this.RedirectToPage("./Details", new { id = this.SalesArticle.ArticleNumber });
         }
 
         private bool SalesArticleExists(string id)
         {
-            return this._context.SalesArticle.Any(e => e.ArticleNumber == id);
+            return this.context.SalesArticle.Any(e => e.ArticleNumber == id);
         }
     }
 }

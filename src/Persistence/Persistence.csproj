@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="linn.common.configuration" Version="2.0.0" />
+    <PackageReference Include="linn.common.persistence" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
   </ItemGroup>
 
