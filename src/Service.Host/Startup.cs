@@ -69,7 +69,9 @@ namespace Linn.LinnappsUi.Service.Host
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
+
             app.UseCookiePolicy();
 
             app.UseMvc();
