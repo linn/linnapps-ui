@@ -16,6 +16,12 @@
             this.serviceDbContext = serviceDbContext;
         }
 
+        public SaCoreType GetById(int coreType)
+        {
+            return this.serviceDbContext.SaCoreType
+                .SingleOrDefault(s => s.CoreType == coreType);
+        }
+
         public IEnumerable<SaCoreType> GetCoreTypes(bool includeInvalid = false)
         {
             return includeInvalid

@@ -30,9 +30,10 @@
             var splits = searchTerm.Split(' ');
             var articles = new List<SalesArticle>();
 
-            articles.AddRange(this.serviceDbContext.SalesArticle.Where(s => s.ArticleNumber.Contains(searchTerm)));
-
-            articles.AddRange(this.serviceDbContext.SalesArticle.Where(s => !s.ArticleNumber.Contains(searchTerm) && this.Matches(s.ArticleNumber, s.InvoiceDescription, splits)));
+            articles.AddRange(this.serviceDbContext.SalesArticle
+                .Where(s => s.ArticleNumber.Contains(searchTerm)));
+            articles.AddRange(this.serviceDbContext.SalesArticle
+                .Where(s => !s.ArticleNumber.Contains(searchTerm) && this.Matches(s.ArticleNumber, s.InvoiceDescription, splits)));
 
             return articles;
         }

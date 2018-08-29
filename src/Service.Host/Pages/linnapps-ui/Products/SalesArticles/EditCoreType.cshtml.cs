@@ -19,15 +19,19 @@
 
         private readonly ITransactionManager transactionManager;
 
+        private readonly ISalesArticleRepository salesArticleRepository;
+
         private readonly ISaCoreTypeRepository coreTypeRepository;
 
         public EditCoreTypeModel(
             ServiceDbContext context,
             ITransactionManager transactionManager,
+            ISalesArticleRepository salesArticleRepository,
             ISaCoreTypeRepository coreTypeRepository)
         {
             this.context = context;
             this.transactionManager = transactionManager;
+            this.salesArticleRepository = salesArticleRepository;
             this.coreTypeRepository = coreTypeRepository;
         }
 
@@ -39,14 +43,14 @@
 
         public SelectList CoreTypes { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public IActionResult OnGet(string id)
         {
             if (id == null)
             {
                 return this.NotFound();
             }
 
-            this.SalesArticle = await this.context.SalesArticle.FirstOrDefaultAsync(m => m.ArticleNumber == id);
+            this.SalesArticle = this.salesArticleRepository.GetByArticleNumber(id);
 
             if (this.SalesArticle == null)
             {
@@ -61,18 +65,17 @@
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!this.ModelState.IsValid)
             {
                 return this.Page();
             }
 
-            var article = await this.context.SalesArticle
-                              .Include(s => s.SaCoreType)
-                              .FirstOrDefaultAsync(m => m.ArticleNumber == this.SalesArticle.ArticleNumber);
-            var coreType = await this.context.SaCoreType
-                               .FirstOrDefaultAsync(m => m.CoreType == this.SelectedCoreType);
+            var article = this.salesArticleRepository.GetByArticleNumber(this.SalesArticle.ArticleNumber);
+            var coreType = this.SelectedCoreType.HasValue
+                               ? this.coreTypeRepository.GetById(this.SelectedCoreType.Value)
+                               : null;
             article.SaCoreType = coreType;
             this.transactionManager.Commit();
 

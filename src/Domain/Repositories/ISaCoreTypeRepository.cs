@@ -6,6 +6,8 @@
 
     public interface ISaCoreTypeRepository
     {
+        SaCoreType GetById(int coreType);
+
         IEnumerable<SaCoreType> GetCoreTypes(bool includeInvalid = false);
     }
 }
