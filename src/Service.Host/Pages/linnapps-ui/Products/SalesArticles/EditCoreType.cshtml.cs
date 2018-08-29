@@ -5,7 +5,6 @@
     using Linn.Common.Persistence;
     using Linn.LinnappsUi.Domain.Products;
     using Linn.LinnappsUi.Domain.Repositories;
-    using Linn.LinnappsUi.Persistence;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;

@@ -17,7 +17,9 @@ $(document).ready(function() {
                             return { label : item.label, value: item.value }
                         }))}
                 });
+        },
+        select: function(event, ui) {
+            location.href = encodeURI('/linnapps-ui/Products/SalesArticles/Details?id=' + ui.item.value);
         }
-        
     });
 })
