@@ -1,7 +1,6 @@
 ﻿namespace Linn.LinnappsUi.Service.Host.Pages.Products.SalesArticles
 {
     using System.Linq;
-    using System.Threading.Tasks;
 
     using Linn.Common.Persistence;
     using Linn.LinnappsUi.Domain.Products;
@@ -11,12 +10,9 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.EntityFrameworkCore;
 
     public class EditCoreTypeModel : PageModel
     {
-        private readonly ServiceDbContext context;
-
         private readonly ITransactionManager transactionManager;
 
         private readonly ISalesArticleRepository salesArticleRepository;
@@ -24,12 +20,10 @@
         private readonly ISaCoreTypeRepository coreTypeRepository;
 
         public EditCoreTypeModel(
-            ServiceDbContext context,
             ITransactionManager transactionManager,
             ISalesArticleRepository salesArticleRepository,
             ISaCoreTypeRepository coreTypeRepository)
         {
-            this.context = context;
             this.transactionManager = transactionManager;
             this.salesArticleRepository = salesArticleRepository;
             this.coreTypeRepository = coreTypeRepository;
@@ -80,11 +74,6 @@
             this.transactionManager.Commit();
 
             return this.RedirectToPage("./Details", new { id = this.SalesArticle.ArticleNumber });
-        }
-
-        private bool SalesArticleExists(string id)
-        {
-            return this.context.SalesArticle.Any(e => e.ArticleNumber == id);
         }
     }
 }
