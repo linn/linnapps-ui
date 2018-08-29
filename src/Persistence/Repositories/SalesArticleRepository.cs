@@ -7,6 +7,8 @@
     using Linn.LinnappsUi.Domain.Repositories;
     using Linn.LinnappsUi.Persistence;
 
+    using Microsoft.EntityFrameworkCore;
+
     public class SalesArticleRepository : ISalesArticleRepository
     {
         private readonly ServiceDbContext serviceDbContext;
@@ -19,13 +21,20 @@
         public SalesArticle GetByArticleNumber(string articleNumber)
         {
             return this.serviceDbContext.SalesArticle
+                .Include(a => a.SaCoreType)
                 .SingleOrDefault(s => s.ArticleNumber == articleNumber);
         }
 
         public IEnumerable<SalesArticle> SearchByNameAndDescription(string searchTerm)
         {
-            return this.serviceDbContext.SalesArticle
-                .Where(s => s.ArticleNumber.Contains(searchTerm) || s.InvoiceDescription.Contains(searchTerm));
+            var splits = searchTerm.Split(' ');
+            var articles = new List<SalesArticle>();
+
+            articles.AddRange(this.serviceDbContext.SalesArticle.Where(s => s.ArticleNumber.Contains(searchTerm)));
+
+            articles.AddRange(this.serviceDbContext.SalesArticle.Where(s => !s.ArticleNumber.Contains(searchTerm) && this.Matches(s.ArticleNumber, s.InvoiceDescription, splits)));
+
+            return articles;
         }
 
         public IEnumerable<SalesArticle> GetByDiscountFamily(string discountFamily, bool includePhasedOut = false)
@@ -33,6 +42,19 @@
             return includePhasedOut
                ? this.serviceDbContext.SalesArticle.Where(s => s.SaDiscountFamily == discountFamily)
                : this.serviceDbContext.SalesArticle.Where(s => s.SaDiscountFamily == discountFamily && s.PhaseOutDate == null);
+        }
+
+        private bool Matches(string articleNumber, string description, string[] splits)
+        {
+            var matchesArticleNumber = true;
+            var matchesDescription = true;
+            foreach (var split in splits)
+            {
+                matchesArticleNumber &= articleNumber.Contains(split);
+                matchesDescription &= description.Contains(split);
+            }
+
+            return matchesDescription || matchesArticleNumber;
         }
     }
 }

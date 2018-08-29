@@ -15,9 +15,12 @@
             <input type="hidden" asp-for="SalesArticle.ArticleNumber" />
 
             <div class="form-group">
-                <label class="control-label">Core Type</label>
-                <input asp-for="SalesArticle.SaCoreType.CoreType" class="form-control" />
+                <label class="control-label">Select Core Type</label>
+                <select asp-for="SelectedCoreType" asp-items="Model.CoreTypes">
+                    <option value=""></option>
+                </select>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
