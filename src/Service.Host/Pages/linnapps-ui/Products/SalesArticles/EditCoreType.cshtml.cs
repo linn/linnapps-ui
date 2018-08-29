@@ -53,7 +53,11 @@
                 return this.NotFound();
             }
 
-            this.CoreTypes = new SelectList(this.coreTypeRepository.GetCoreTypes().ToList(), "CoreType", "Description", null);
+            this.CoreTypes = new SelectList(
+                this.coreTypeRepository.GetCoreTypes().ToList(),
+                "CoreType",
+                "Description",
+                this.SalesArticle.SaCoreType?.CoreType);
             return this.Page();
         }
 
@@ -67,7 +71,8 @@
             var article = await this.context.SalesArticle
                               .Include(s => s.SaCoreType)
                               .FirstOrDefaultAsync(m => m.ArticleNumber == this.SalesArticle.ArticleNumber);
-            var coreType = await this.context.SaCoreType.FirstOrDefaultAsync(m => m.CoreType == this.SelectedCoreType);
+            var coreType = await this.context.SaCoreType
+                               .FirstOrDefaultAsync(m => m.CoreType == this.SelectedCoreType);
             article.SaCoreType = coreType;
             this.transactionManager.Commit();
 
