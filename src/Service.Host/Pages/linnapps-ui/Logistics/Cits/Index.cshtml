@@ -1,0 +1,46 @@
+﻿@page
+@model Service.Host.Pages.linnapps_ui.Logistics.Cits.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            <a asp-page="./Index" asp-route-sortOrder="@Model.CodeSort">
+                @Html.DisplayNameFor(model => model.Cit[0].Code)
+            </a>
+        </th>
+        <th>
+            <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+            @Html.DisplayNameFor(model => model.Cit[0].Name)
+            </a>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Cit) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            <a asp-page="./Edit" asp-route-id="@item.Code">Edit</a> |
+            <a asp-page="./Details" asp-route-id="@item.Code">Details</a> 
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

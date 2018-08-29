@@ -1,5 +1,6 @@
 ﻿namespace Linn.LinnappsUi.Persistence
 {
+    using Domain.Logistics;
     using Linn.LinnappsUi.Domain.Products;
 
     using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,18 @@
 
         public DbSet<SalesArticle> SalesArticle { get; set; }
 
+        public DbSet<Cit> Cit { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
+        {
+            this.BuildSaCoreType(builder);
+            this.BuildSalesArticle(builder);
+            this.BuildCit(builder);
+           
+            base.OnModelCreating(builder);
+        }
+
+        private void BuildSaCoreType(ModelBuilder builder)
         {
             builder.Entity<SaCoreType>().ToTable("SA_CORE_TYPES");
             builder.Entity<SaCoreType>().HasKey(s => s.CoreType);
@@ -27,7 +39,10 @@
             builder.Entity<SaCoreType>().Property(s => s.LookaheadDays).HasColumnName("LOOKAHEAD_DAYS");
             builder.Entity<SaCoreType>().Property(s => s.TriggerLevel).HasColumnName("TRIGGER_LEVEL");
             builder.Entity<SaCoreType>().Property(s => s.SortOrder).HasColumnName("SORT_ORDER");
+        }
 
+        private void BuildSalesArticle(ModelBuilder builder)
+        {
             builder.Entity<SalesArticle>().ToTable("SALES_ARTICLES");
             builder.Entity<SalesArticle>().HasKey(s => s.ArticleNumber);
 
@@ -40,8 +55,15 @@
             builder.Entity<SalesArticle>().Property(s => s.PackingDescription).HasColumnName("PACKING_DESCRIPTION").HasMaxLength(50);
             builder.Entity<SalesArticle>().Property(s => s.SaDiscountFamily).HasColumnName("SA_DISCOUNT_FAMILY").HasMaxLength(10);
             builder.Entity<SalesArticle>().Property(s => s.CartonType).HasColumnName("CARTON_TYPE").HasMaxLength(10);
+        }
 
-            base.OnModelCreating(builder);
+        private void BuildCit(ModelBuilder builder)
+        {
+            builder.Entity<Cit>().ToTable("CITS");
+            builder.Entity<Cit>().HasKey(s => s.Code);
+
+            builder.Entity<Cit>().Property(s => s.Code).HasColumnName("CODE").HasMaxLength(10);
+            builder.Entity<Cit>().Property(s => s.Name).HasColumnName("NAME").HasMaxLength(50);
         }
     }
 }
