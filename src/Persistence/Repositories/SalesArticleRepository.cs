@@ -28,15 +28,15 @@
         public IEnumerable<SalesArticle> SearchByNameAndDescription(string searchTerm)
         {
             var splits = searchTerm.Split(' ');
-            var articles = new List<SalesArticle>();
+            var selectedArticles = new List<SalesArticle>();
 
             var articlesToCheck = this.serviceDbContext.SalesArticle.ToList();
 
-            articles.AddRange(articlesToCheck.Where(s => s.ArticleNumber.Contains(searchTerm)));
-            articles.AddRange(articlesToCheck
+            selectedArticles.AddRange(articlesToCheck.Where(s => s.ArticleNumber.Contains(searchTerm)));
+            selectedArticles.AddRange(articlesToCheck
                 .Where(s => !s.ArticleNumber.Contains(searchTerm) && this.Matches(s.ArticleNumber, s.InvoiceDescription, splits)));
 
-            return articles;
+            return selectedArticles;
         }
 
         public IEnumerable<SalesArticle> GetByDiscountFamily(string discountFamily, bool includePhasedOut = false)
