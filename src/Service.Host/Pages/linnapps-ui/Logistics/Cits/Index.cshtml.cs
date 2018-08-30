@@ -10,6 +10,8 @@ using Linn.LinnappsUi.Persistence;
 
 namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 {
+    using Linn.LinnappsUi.Service.Host;
+
     public class IndexModel : PageModel
     {
         private readonly Linn.LinnappsUi.Persistence.ServiceDbContext _context;
@@ -19,17 +21,32 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
             _context = context;
         }
 
-        public IList<Cit> Cit { get;set; }
+        public PaginatedList<Cit> Cit { get;set; }
 
         public string NameSort { get; set; }
         public string CodeSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
+        public int TotalPages { get; set; }
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
         {
+            CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             CodeSort = sortOrder == "Code" ? "code_desc" : "Code";
 
             var cit = await _context.Cit.ToListAsync();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                pageIndex = 1;
+                cit = cit.Where(s => s.Name.Contains(searchString) || s.Code.Contains(searchString)).ToList();
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            CurrentFilter = searchString;
 
             switch (sortOrder)
             {
@@ -47,7 +64,8 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
                     break;
             }
 
-            this.Cit = cit;
+            this.Cit = PaginatedList<Cit>.CreateList(cit, pageIndex ?? 1, 10);
+            this.TotalPages = this.Cit.TotalPages;
         }
     }
 }
