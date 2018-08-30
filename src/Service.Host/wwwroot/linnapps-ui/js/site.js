@@ -10,6 +10,7 @@ $(document).ready(function() {
                 url: '/linnapps-ui/products/salesarticles/search',
                 type: 'GET',
                 dataType: "json",
+                minLength: 3,
                 data: { searchTerm : request.term },
                 success: function(data) {
                     response($.map(data,
