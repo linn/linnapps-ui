@@ -30,7 +30,7 @@
             var splits = searchTerm.Split(' ');
             var selectedArticles = new List<SalesArticle>();
 
-            var articlesToCheck = this.serviceDbContext.SalesArticle.ToList();
+            var articlesToCheck = this.serviceDbContext.SalesArticle.AsNoTracking();
 
             selectedArticles.AddRange(articlesToCheck.Where(s => s.ArticleNumber.Contains(searchTerm)));
             selectedArticles.AddRange(articlesToCheck
