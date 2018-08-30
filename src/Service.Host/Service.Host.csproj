@@ -17,6 +17,7 @@
     <PackageReference Include="Linn.Common.Authentication.Host" Version="1.0.2" />
     <PackageReference Include="linn.common.configuration" Version="2.0.0" />
     <PackageReference Include="linn.common.logging" Version="2.0.0" />
+    <PackageReference Include="linn.common.persistence" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
@@ -35,6 +36,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Pages\linnapps-ui\Products\EanCodesReport.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\linnapps-ui\Products\SalesArticles\Search.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Pages\linnapps-ui\Thing.cshtml">

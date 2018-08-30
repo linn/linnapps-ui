@@ -24,7 +24,7 @@
             // oracle package, procedure, function proxies
             builder.RegisterType<SalaPackProxy>().As<ISalaPack>();
 
-            // restclient proxies
+            // rest client proxies
             builder.RegisterType<RestClient>().As<IRestClient>();
             builder.RegisterType<StockPoolProxy>().As<IStockPoolService>().WithParameter("rootUri", ConfigurationManager.Configuration["PROXY_ROOT"]);
         }

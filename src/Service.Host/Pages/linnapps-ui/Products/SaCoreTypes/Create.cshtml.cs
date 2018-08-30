@@ -1,43 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Linn.LinnappsUi.Domain.Products;
-using Linn.LinnappsUi.Persistence;
-
-namespace Service.Host.Pages.Products.SaCoreTypes
+﻿namespace Linn.LinnappsUi.Service.Host.Pages.Products.SaCoreTypes
 {
+    using System.Threading.Tasks;
+
+    using Linn.LinnappsUi.Domain.Products;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+
     public class CreateModel : PageModel
     {
-        private readonly Linn.LinnappsUi.Persistence.ServiceDbContext _context;
+        private readonly Linn.LinnappsUi.Persistence.ServiceDbContext context;
 
         public CreateModel(Linn.LinnappsUi.Persistence.ServiceDbContext context)
         {
-            _context = context;
-        }
-
-        public IActionResult OnGet()
-        {
-            return Page();
+            this.context = context;
         }
 
         [BindProperty]
         public SaCoreType SaCoreType { get; set; }
 
+        public IActionResult OnGet()
+        {
+            return this.Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return Page();
+                return this.Page();
             }
 
-            _context.SaCoreType.Add(SaCoreType);
-            await _context.SaveChangesAsync();
+            this.context.SaCoreType.Add(this.SaCoreType);
+            await this.context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return this.RedirectToPage("./Index");
         }
     }
 }

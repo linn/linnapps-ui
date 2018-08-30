@@ -56,6 +56,7 @@
             builder.Entity<SalesArticle>().Property(s => s.PackingDescription).HasColumnName("PACKING_DESCRIPTION").HasMaxLength(50);
             builder.Entity<SalesArticle>().Property(s => s.SaDiscountFamily).HasColumnName("SA_DISCOUNT_FAMILY").HasMaxLength(10);
             builder.Entity<SalesArticle>().Property(s => s.CartonType).HasColumnName("CARTON_TYPE").HasMaxLength(10);
+            builder.Entity<SalesArticle>().HasOne(s => s.SaCoreType);			
         }
 
         private void BuildCit(ModelBuilder builder)

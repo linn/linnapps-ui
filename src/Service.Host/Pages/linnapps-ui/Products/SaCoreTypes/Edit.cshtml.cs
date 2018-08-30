@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Linn.LinnappsUi.Domain.Products;
-using Linn.LinnappsUi.Persistence;
-
-namespace Service.Host.Pages.Products.SaCoreTypes
+﻿namespace Linn.LinnappsUi.Service.Host.Pages.Products.SaCoreTypes
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Linn.LinnappsUi.Domain.Products;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.EntityFrameworkCore;
+
     public class EditModel : PageModel
     {
-        private readonly Linn.LinnappsUi.Persistence.ServiceDbContext _context;
+        private readonly Linn.LinnappsUi.Persistence.ServiceDbContext context;
 
         public EditModel(Linn.LinnappsUi.Persistence.ServiceDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         [BindProperty]
@@ -27,36 +25,37 @@ namespace Service.Host.Pages.Products.SaCoreTypes
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            SaCoreType = await _context.SaCoreType.FirstOrDefaultAsync(m => m.CoreType == id);
+            this.SaCoreType = await this.context.SaCoreType.FirstOrDefaultAsync(m => m.CoreType == id);
 
-            if (SaCoreType == null)
+            if (this.SaCoreType == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
-            return Page();
+
+            return this.Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return Page();
+                return this.Page();
             }
 
-            _context.Attach(SaCoreType).State = EntityState.Modified;
+            this.context.Attach(this.SaCoreType).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await this.context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SaCoreTypeExists(SaCoreType.CoreType))
+                if (!this.SaCoreTypeExists(this.SaCoreType.CoreType))
                 {
-                    return NotFound();
+                    return this.NotFound();
                 }
                 else
                 {
@@ -64,12 +63,12 @@ namespace Service.Host.Pages.Products.SaCoreTypes
                 }
             }
 
-            return RedirectToPage("./Index");
+            return this.RedirectToPage("./Index");
         }
 
         private bool SaCoreTypeExists(int id)
         {
-            return _context.SaCoreType.Any(e => e.CoreType == id);
+            return this.context.SaCoreType.Any(e => e.CoreType == id);
         }
     }
 }
