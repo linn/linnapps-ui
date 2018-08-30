@@ -1,5 +1,6 @@
 ﻿namespace Linn.LinnappsUi.Persistence
 {
+    using Domain.Common;
     using Domain.Logistics;
     using Linn.LinnappsUi.Domain.Products;
 

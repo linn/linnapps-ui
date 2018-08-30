@@ -10,6 +10,7 @@ using Linn.LinnappsUi.Persistence;
 
 namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 {
+    using Linn.LinnappsUi.Domain.Common;
     using Linn.LinnappsUi.Service.Host;
 
     public class IndexModel : PageModel

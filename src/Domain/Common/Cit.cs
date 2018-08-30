@@ -1,6 +1,5 @@
-﻿namespace Linn.LinnappsUi.Domain.Logistics
+﻿namespace Linn.LinnappsUi.Domain.Common
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     public class Cit
@@ -10,5 +9,8 @@
 
         [Display(Name = "Name")]
         public string Name { get; set; }
+
+        //[Display(Name = "CIT Leader")]
+        //public AuthUserName CitLeader { get; set; }
     }
 }

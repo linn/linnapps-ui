@@ -11,6 +11,8 @@ using Linn.LinnappsUi.Persistence;
 
 namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 {
+    using Linn.LinnappsUi.Domain.Common;
+
     public class EditModel : PageModel
     {
         private readonly Linn.LinnappsUi.Persistence.ServiceDbContext _context;
