@@ -8,7 +8,7 @@
 
         public string EanCode { get; set; }
 
-        public string LabelDescripton1 { get; set; }
+        public string LabelDescription1 { get; set; }
 
         public string PackingDescription { get; set; }
     }

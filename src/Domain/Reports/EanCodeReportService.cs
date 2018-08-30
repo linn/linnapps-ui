@@ -35,7 +35,7 @@
                                      ArticleDescription = c.InvoiceDescription,
                                      EanCode = c.EanCode,
                                      PackingDescription = c.PackingDescription,
-                                     LabelDescripton1 = this.salaPack.LabelDescription1(c.ArticleNumber)
+                                     LabelDescription1 = this.salaPack.LabelDescription1(c.ArticleNumber)
                                  });
         }
     }

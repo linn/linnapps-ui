@@ -1,0 +1,37 @@
+﻿@page
+@model Linn.LinnappsUi.Service.Host.Pages.Products.SalesArticles.EditCoreTypeModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit core type for @Html.DisplayTextFor(a => a.SalesArticle.ArticleNumber)</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SalesArticle.ArticleNumber" />
+
+            <div class="form-group">
+                <label class="control-label">Select Core Type</label>
+                <select asp-for="SelectedCoreType" asp-items="Model.CoreTypes">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Cancel</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
