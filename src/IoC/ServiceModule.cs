@@ -16,7 +16,6 @@
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ThingProxy>().As<IThingService>();
             builder.RegisterType<SaCoreTypesReportService>().As<ISaCoreTypesReportService>();
             builder.RegisterType<EanCodeReportService>().As<IEanCodeReportService>();
             builder.RegisterType<CsvCreator>().As<ICsvCreator>();
@@ -27,6 +26,7 @@
             // rest client proxies
             builder.RegisterType<RestClient>().As<IRestClient>();
             builder.RegisterType<StockPoolProxy>().As<IStockPoolService>().WithParameter("rootUri", ConfigurationManager.Configuration["PROXY_ROOT"]);
+            builder.RegisterType<SalesArticleProxy>().As<ISalesArticleService>().WithParameter("rootUri", ConfigurationManager.Configuration["PROXY_ROOT"]);
         }
     }
 }

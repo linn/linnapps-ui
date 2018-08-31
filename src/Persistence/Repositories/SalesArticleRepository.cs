@@ -25,20 +25,6 @@
                 .SingleOrDefault(s => s.ArticleNumber == articleNumber);
         }
 
-        public IEnumerable<SalesArticle> SearchByNameAndDescription(string searchTerm)
-        {
-            var splits = searchTerm.Split(' ');
-            var selectedArticles = new List<SalesArticle>();
-
-            var articlesToCheck = this.serviceDbContext.SalesArticle.AsNoTracking();
-
-            selectedArticles.AddRange(articlesToCheck.Where(s => s.ArticleNumber.Contains(searchTerm)));
-            selectedArticles.AddRange(articlesToCheck
-                .Where(s => !s.ArticleNumber.Contains(searchTerm) && this.Matches(s.ArticleNumber, s.InvoiceDescription, splits)));
-
-            return selectedArticles;
-        }
-
         public IEnumerable<SalesArticle> GetByDiscountFamily(string discountFamily, bool includePhasedOut = false)
         {
             return includePhasedOut

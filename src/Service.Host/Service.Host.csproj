@@ -41,9 +41,6 @@
     <Content Update="Pages\linnapps-ui\Products\SalesArticles\Search.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Pages\linnapps-ui\Thing.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="Pages\linnapps-ui\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

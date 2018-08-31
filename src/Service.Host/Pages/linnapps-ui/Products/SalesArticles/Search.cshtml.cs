@@ -2,23 +2,23 @@
 {
     using System.Linq;
 
-    using Linn.LinnappsUi.Domain.Repositories;
+    using Linn.LinnappsUi.Domain.RemoteServices;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
     public class SalesArticleSearchModel : PageModel
     {
-        private readonly ISalesArticleRepository salesArticleRepository;
+        private readonly ISalesArticleService salesArticleService;
 
-        public SalesArticleSearchModel(ISalesArticleRepository salesArticleRepository)
+        public SalesArticleSearchModel(ISalesArticleService salesArticleService)
         {
-            this.salesArticleRepository = salesArticleRepository;
+            this.salesArticleService = salesArticleService;
         }
 
         public JsonResult OnGet(string searchTerm)
         {
-            var result = this.salesArticleRepository.SearchByNameAndDescription(searchTerm.ToUpper());
+            var result = this.salesArticleService.Search(searchTerm);
             return new JsonResult(result
                 .Take(20)
                 .Select(s => new { value = s.ArticleNumber, label = $"{s.ArticleNumber} - {s.InvoiceDescription}" }));

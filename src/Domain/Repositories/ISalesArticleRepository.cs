@@ -8,8 +8,6 @@
     {
         SalesArticle GetByArticleNumber(string articleNumber);
 
-        IEnumerable<SalesArticle> SearchByNameAndDescription(string searchTerm);
-
         IEnumerable<SalesArticle> GetByDiscountFamily(string discountFamily, bool includePhasedOut = false);
     }
 }
