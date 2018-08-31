@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Linn.LinnappsUi.Domain.Logistics;
-using Linn.LinnappsUi.Persistence;
-
-namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
+﻿namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 {
+    using System.Threading.Tasks;
     using Linn.LinnappsUi.Domain.Common;
+    using Linn.LinnappsUi.Domain.Repositories;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.EntityFrameworkCore;
 
     public class DetailsModel : PageModel
     {
-        private readonly Linn.LinnappsUi.Persistence.ServiceDbContext _context;
+        private readonly ICitRepository citRepository;
 
-        public DetailsModel(Linn.LinnappsUi.Persistence.ServiceDbContext context)
+        public DetailsModel(ICitRepository citRepository)
         {
-            _context = context;
+            this.citRepository = citRepository;
         }
 
         public Cit Cit { get; set; }
@@ -30,7 +25,7 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
                 return NotFound();
             }
 
-            Cit = await _context.Cit.FirstOrDefaultAsync(m => m.Code == id);
+            Cit = this.citRepository.GetByCode(id);
 
             if (Cit == null)
             {

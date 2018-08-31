@@ -38,6 +38,7 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 
             var cit = await _context.Cit.ToListAsync();
 
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 pageIndex = 1;

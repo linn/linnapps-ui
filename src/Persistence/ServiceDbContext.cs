@@ -23,6 +23,7 @@
         {
             this.BuildSaCoreType(builder);
             this.BuildSalesArticle(builder);
+            this.BuildAuthUserName(builder);
             this.BuildCit(builder);
            
             base.OnModelCreating(builder);
@@ -66,6 +67,17 @@
 
             builder.Entity<Cit>().Property(s => s.Code).HasColumnName("CODE").HasMaxLength(10);
             builder.Entity<Cit>().Property(s => s.Name).HasColumnName("NAME").HasMaxLength(50);
+
+            builder.Entity<Cit>().HasOne(s => s.CitLeader);
+        }
+
+        private void BuildAuthUserName(ModelBuilder builder)
+        {
+            builder.Entity<AuthUserName>().ToTable("AUTH_USER_NAME_VIEW");
+            builder.Entity<AuthUserName>().HasKey(s => s.UserNumber);
+
+            builder.Entity<AuthUserName>().Property(s => s.UserNumber).HasColumnName("USER_NUMBER");
+            builder.Entity<AuthUserName>().Property(s => s.Name).HasColumnName("USER_NAME").HasMaxLength(50);
         }
     }
 }
