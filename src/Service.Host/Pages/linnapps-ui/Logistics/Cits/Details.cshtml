@@ -27,6 +27,20 @@
             @Html.DisplayFor(model => model.Cit.Name)
         </dd>
     </dl>
+    @if (Model.Cit.Department != null)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                Department
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cit.Department.Description)
+                &nbsp (
+                @Html.DisplayFor(model => model.Cit.Department.DepartmentCode) 
+                 )
+            </dd>
+        </dl>
+    }
     @if (Model.Cit.CitLeader != null)
     {
         <dl class="dl-horizontal">

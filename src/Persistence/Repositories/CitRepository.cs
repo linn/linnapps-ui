@@ -18,6 +18,7 @@
         {
             return this.serviceDbContext.Cit
                 .Include(a => a.CitLeader)
+                .Include(a => a.Department)
                 .SingleOrDefault(s => s.Code == code);
         }
     }

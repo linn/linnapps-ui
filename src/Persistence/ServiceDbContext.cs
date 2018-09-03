@@ -24,6 +24,7 @@
             this.BuildSaCoreType(builder);
             this.BuildSalesArticle(builder);
             this.BuildAuthUserName(builder);
+            this.BuildLinnDepartment(builder);
             this.BuildCit(builder);
            
             base.OnModelCreating(builder);
@@ -69,6 +70,7 @@
             builder.Entity<Cit>().Property(s => s.Name).HasColumnName("NAME").HasMaxLength(50);
 
             builder.Entity<Cit>().HasOne(s => s.CitLeader);
+            builder.Entity<Cit>().HasOne(s => s.Department);
         }
 
         private void BuildAuthUserName(ModelBuilder builder)
@@ -78,6 +80,18 @@
 
             builder.Entity<AuthUserName>().Property(s => s.UserNumber).HasColumnName("USER_NUMBER");
             builder.Entity<AuthUserName>().Property(s => s.Name).HasColumnName("USER_NAME").HasMaxLength(50);
+        }
+
+        private void BuildLinnDepartment(ModelBuilder builder)
+        {
+            builder.Entity<LinnDepartment>().ToTable("LINN_DEPARTMENTS");
+            builder.Entity<LinnDepartment>().HasKey(s => s.DepartmentCode);
+
+            builder.Entity<LinnDepartment>().Property(s => s.DepartmentCode).HasColumnName("DEPARTMENT_CODE").HasMaxLength(10);
+            builder.Entity<LinnDepartment>().Property(s => s.Description).HasColumnName("DESCRIPTION").HasMaxLength(50);
+            builder.Entity<LinnDepartment>().Property(s => s.PersonnelDept).HasColumnName("PERSONNEL_DEPARTMENT").HasMaxLength(1);
+            builder.Entity<LinnDepartment>().Property(s => s.DateClosed).HasColumnName("DATE_CLOSED");
+
         }
     }
 }
