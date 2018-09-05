@@ -19,6 +19,8 @@
 
         public DbSet<Cit> Cit { get; set; }
 
+        public DbSet<LinnDepartment> LinnDepartment { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             this.BuildSaCoreType(builder);

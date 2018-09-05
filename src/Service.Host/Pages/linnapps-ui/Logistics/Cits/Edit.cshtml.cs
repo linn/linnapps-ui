@@ -12,18 +12,26 @@ using Linn.LinnappsUi.Persistence;
 namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 {
     using Linn.LinnappsUi.Domain.Common;
+    using Linn.LinnappsUi.Domain.Repositories;
 
     public class EditModel : PageModel
     {
         private readonly Linn.LinnappsUi.Persistence.ServiceDbContext _context;
 
-        public EditModel(Linn.LinnappsUi.Persistence.ServiceDbContext context)
+        private readonly IDepartmentRepository departmentRepository;
+
+        public EditModel(Linn.LinnappsUi.Persistence.ServiceDbContext context, IDepartmentRepository departmentRepository)
         {
             _context = context;
+            this.departmentRepository = departmentRepository;
         }
 
         [BindProperty]
         public Cit Cit { get; set; }
+
+        [BindProperty]
+        public string SelectedDepartment { get; set; }
+        public SelectList Departments { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -38,6 +46,15 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
             {
                 return NotFound();
             }
+
+            this.SelectedDepartment = Cit.Department?.DepartmentCode ?? string.Empty;
+
+            this.Departments = new SelectList(
+                this.departmentRepository.GetOpenPersonnelDepartments().ToList(),
+                "DepartmentCode",
+                "Description",
+                this.SelectedDepartment);
+
             return Page();
         }
 
@@ -47,6 +64,11 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
             {
                 return Page();
             }
+
+            var department = !string.IsNullOrEmpty(this.SelectedDepartment)
+                ? this.departmentRepository.GetByCode(this.SelectedDepartment)
+                : null;
+            this.Cit.Department = department;
 
             _context.Attach(Cit).State = EntityState.Modified;
 

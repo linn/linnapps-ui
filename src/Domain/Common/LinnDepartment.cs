@@ -6,7 +6,7 @@
     public class LinnDepartment
     {
         [Display(Name = "Code")]
-        public int DepartmentCode { get; set; }
+        public string DepartmentCode { get; set; }
 
         [Display(Name = "Description")]
         public string Description { get; set; }
