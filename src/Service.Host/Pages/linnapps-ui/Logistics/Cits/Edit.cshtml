@@ -23,7 +23,10 @@
             <div class="form-group">
                 <label class="control-label">Department</label>
                 @Html.DropDownListFor(m => m.SelectedDepartment, Model.Departments, "Select Department", new { @class = "form-control" })
-                @*@Html.DropDownList("Departments", Model.Departments, "Select Department", new { @class = "form-control" })*@
+            </div>
+            <div class="form-group">
+                <label class="control-label">CIT Leader</label>
+                @Html.DropDownListFor(m => m.SelectedCitLeader, Model.AuthUsers, "Select CIT Leader", new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

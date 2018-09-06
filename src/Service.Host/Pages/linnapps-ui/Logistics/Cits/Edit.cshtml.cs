@@ -22,11 +22,14 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 
         private readonly ICitRepository citRepository;
 
-        public EditModel(Linn.LinnappsUi.Persistence.ServiceDbContext context, IDepartmentRepository departmentRepository, ICitRepository citRepository)
+        private readonly IAuthUserNameRepository authUserNameRepository;
+
+        public EditModel(Linn.LinnappsUi.Persistence.ServiceDbContext context, IDepartmentRepository departmentRepository, ICitRepository citRepository, IAuthUserNameRepository authUserNameRepository)
         {
             _context = context;
             this.departmentRepository = departmentRepository;
             this.citRepository = citRepository;
+            this.authUserNameRepository = authUserNameRepository;
         }
 
         [BindProperty]
@@ -35,6 +38,10 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
         [BindProperty]
         public string SelectedDepartment { get; set; }
         public SelectList Departments { get; set; }
+
+        [BindProperty]
+        public int? SelectedCitLeader { get; set; }
+        public SelectList AuthUsers { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -58,6 +65,14 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
                 "Description",
                 this.SelectedDepartment);
 
+            this.SelectedCitLeader = Cit.CitLeader?.UserNumber ?? null;
+
+            this.AuthUsers = new SelectList(
+                this.authUserNameRepository.GetValidAuthUsers().ToList(),
+                "UserNumber",
+                "Name",
+                this.SelectedCitLeader);
+
             return Page();
         }
 
@@ -72,6 +87,11 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
                 ? this.departmentRepository.GetByCode(this.SelectedDepartment)
                 : null;
             this.Cit.Department = department;
+
+            var citLeader = this.SelectedCitLeader != null
+                ? this.authUserNameRepository.GetByNumber((int) this.SelectedCitLeader)
+                : null;
+            this.Cit.CitLeader = citLeader;
 
             _context.Attach(Cit).State = EntityState.Modified;
 

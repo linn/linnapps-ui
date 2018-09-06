@@ -17,6 +17,7 @@
             builder.RegisterType<CitRepository>().As<ICitRepository>();
             builder.RegisterType<SaCoreTypeRepository>().As<ISaCoreTypeRepository>();
             builder.RegisterType<DepartmentRepository>().As<IDepartmentRepository>();
+            builder.RegisterType<AuthUserNameRepository>().As<IAuthUserNameRepository>();
         }
     }
 }

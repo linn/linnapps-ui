@@ -21,6 +21,8 @@
 
         public DbSet<LinnDepartment> LinnDepartment { get; set; }
 
+        public DbSet<AuthUserName> AuthUserName { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             this.BuildSaCoreType(builder);
@@ -83,6 +85,7 @@
 
             builder.Entity<AuthUserName>().Property(s => s.UserNumber).HasColumnName("USER_NUMBER");
             builder.Entity<AuthUserName>().Property(s => s.Name).HasColumnName("USER_NAME").HasMaxLength(50);
+            builder.Entity<AuthUserName>().Property(s => s.DateInvalid).HasColumnName("DATE_INVALID");
         }
 
         private void BuildLinnDepartment(ModelBuilder builder)
