@@ -70,9 +70,10 @@
 
             builder.Entity<Cit>().Property(s => s.Code).HasColumnName("CODE").HasMaxLength(10);
             builder.Entity<Cit>().Property(s => s.Name).HasColumnName("NAME").HasMaxLength(50);
+            builder.Entity<Cit>().Property(s => s.DepartmentCode).HasColumnName("DEPARTMENT_CODE").HasMaxLength(10);
 
             builder.Entity<Cit>().HasOne(s => s.CitLeader);
-            builder.Entity<Cit>().HasOne(s => s.Department);
+            builder.Entity<Cit>().HasOne(s => s.Department).WithMany(d => d.Cits).HasForeignKey(s => s.DepartmentCode);
         }
 
         private void BuildAuthUserName(ModelBuilder builder)
@@ -93,7 +94,6 @@
             builder.Entity<LinnDepartment>().Property(s => s.Description).HasColumnName("DESCRIPTION").HasMaxLength(50);
             builder.Entity<LinnDepartment>().Property(s => s.PersonnelDept).HasColumnName("PERSONNEL_DEPARTMENT").HasMaxLength(1);
             builder.Entity<LinnDepartment>().Property(s => s.DateClosed).HasColumnName("DATE_CLOSED");
-
         }
     }
 }

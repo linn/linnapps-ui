@@ -20,10 +20,13 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 
         private readonly IDepartmentRepository departmentRepository;
 
-        public EditModel(Linn.LinnappsUi.Persistence.ServiceDbContext context, IDepartmentRepository departmentRepository)
+        private readonly ICitRepository citRepository;
+
+        public EditModel(Linn.LinnappsUi.Persistence.ServiceDbContext context, IDepartmentRepository departmentRepository, ICitRepository citRepository)
         {
             _context = context;
             this.departmentRepository = departmentRepository;
+            this.citRepository = citRepository;
         }
 
         [BindProperty]
@@ -40,7 +43,7 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
                 return NotFound();
             }
 
-            Cit = await _context.Cit.FirstOrDefaultAsync(m => m.Code == id);
+            Cit = this.citRepository.GetByCode(id);
 
             if (Cit == null)
             {

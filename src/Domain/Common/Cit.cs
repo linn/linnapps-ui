@@ -16,7 +16,9 @@
         public AuthUserName CitLeader { get; set; }
 
         [Display(Name = "Department")]
-        [ForeignKey("DEPARTMENT_CODE")]
+        //[ForeignKey("DEPARTMENT_CODE")]
         public LinnDepartment Department { get; set; }
+
+        public string DepartmentCode { get; set; }
     }
 }
