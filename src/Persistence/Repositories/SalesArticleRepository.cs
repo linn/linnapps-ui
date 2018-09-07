@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
     using Linn.LinnappsUi.Domain.Products;
     using Linn.LinnappsUi.Domain.Repositories;
     using Linn.LinnappsUi.Persistence;
