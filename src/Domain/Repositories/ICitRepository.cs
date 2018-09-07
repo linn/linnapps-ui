@@ -5,5 +5,7 @@
     public interface ICitRepository
     {
         Cit GetByCode(string code);
+
+        void UpdateCit(Cit cit);
     }
 }

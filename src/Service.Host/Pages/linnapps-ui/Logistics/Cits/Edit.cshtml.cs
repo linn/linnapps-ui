@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Linn.LinnappsUi.Domain.Logistics;
-using Linn.LinnappsUi.Persistence;
-
-namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
+﻿namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Linn.Common.Persistence;
     using Linn.LinnappsUi.Domain.Common;
     using Linn.LinnappsUi.Domain.Repositories;
+    using Linn.LinnappsUi.Persistence;
+    using Microsoft.EntityFrameworkCore;
 
     public class EditModel : PageModel
     {
-        private readonly Linn.LinnappsUi.Persistence.ServiceDbContext _context;
+        private readonly ITransactionManager transactionManager;
 
         private readonly IDepartmentRepository departmentRepository;
 
@@ -24,12 +21,12 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
 
         private readonly IAuthUserNameRepository authUserNameRepository;
 
-        public EditModel(Linn.LinnappsUi.Persistence.ServiceDbContext context, IDepartmentRepository departmentRepository, ICitRepository citRepository, IAuthUserNameRepository authUserNameRepository)
+        public EditModel(IDepartmentRepository departmentRepository, ICitRepository citRepository, IAuthUserNameRepository authUserNameRepository, ITransactionManager transactionManager)
         {
-            _context = context;
             this.departmentRepository = departmentRepository;
             this.citRepository = citRepository;
             this.authUserNameRepository = authUserNameRepository;
+            this.transactionManager = transactionManager;
         }
 
         [BindProperty]
@@ -93,30 +90,11 @@ namespace Service.Host.Pages.linnapps_ui.Logistics.Cits
                 : null;
             this.Cit.CitLeader = citLeader;
 
-            _context.Attach(Cit).State = EntityState.Modified;
+            this.citRepository.UpdateCit(this.Cit);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CitExists(Cit.Code))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            this.transactionManager.Commit();
 
             return RedirectToPage("./Index");
-        }
-
-        private bool CitExists(string id)
-        {
-            return _context.Cit.Any(e => e.Code == id);
         }
     }
 }

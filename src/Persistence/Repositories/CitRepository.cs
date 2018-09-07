@@ -21,5 +21,10 @@
                 .Include(a => a.Department)
                 .SingleOrDefault(s => s.Code == code);
         }
+
+        public void UpdateCit(Cit cit)
+        {
+            this.serviceDbContext.Attach(cit).State = EntityState.Modified;
+        }
     }
 }
