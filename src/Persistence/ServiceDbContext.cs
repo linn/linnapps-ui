@@ -1,7 +1,7 @@
 ﻿namespace Linn.LinnappsUi.Persistence
 {
     using Domain.Common;
-    using Domain.Logistics;
+
     using Linn.LinnappsUi.Domain.Products;
 
     using Microsoft.EntityFrameworkCore;
@@ -30,7 +30,7 @@
             this.BuildAuthUserName(builder);
             this.BuildLinnDepartment(builder);
             this.BuildCit(builder);
-           
+
             base.OnModelCreating(builder);
         }
 
@@ -62,7 +62,7 @@
             builder.Entity<SalesArticle>().Property(s => s.PackingDescription).HasColumnName("PACKING_DESCRIPTION").HasMaxLength(50);
             builder.Entity<SalesArticle>().Property(s => s.SaDiscountFamily).HasColumnName("SA_DISCOUNT_FAMILY").HasMaxLength(10);
             builder.Entity<SalesArticle>().Property(s => s.CartonType).HasColumnName("CARTON_TYPE").HasMaxLength(10);
-            builder.Entity<SalesArticle>().HasOne(s => s.SaCoreType);			
+            builder.Entity<SalesArticle>().HasOne(s => s.SaCoreType);
         }
 
         private void BuildCit(ModelBuilder builder)
@@ -72,10 +72,12 @@
 
             builder.Entity<Cit>().Property(s => s.Code).HasColumnName("CODE").HasMaxLength(10);
             builder.Entity<Cit>().Property(s => s.Name).HasColumnName("NAME").HasMaxLength(50);
-            builder.Entity<Cit>().Property(s => s.DepartmentCode).HasColumnName("DEPARTMENT_CODE").HasMaxLength(10);
+            builder.Entity<Cit>().Property(s => s.DepartmentCode)
+                .HasColumnName("DEPARTMENT_CODE").HasMaxLength(10);
 
             builder.Entity<Cit>().HasOne(s => s.CitLeader);
-            builder.Entity<Cit>().HasOne(s => s.Department).WithMany(d => d.Cits).HasForeignKey(s => s.DepartmentCode);
+            builder.Entity<Cit>().HasOne(s => s.Department)
+                .WithMany(d => d.Cits).HasForeignKey(s => s.DepartmentCode);
         }
 
         private void BuildAuthUserName(ModelBuilder builder)
@@ -93,9 +95,12 @@
             builder.Entity<LinnDepartment>().ToTable("LINN_DEPARTMENTS");
             builder.Entity<LinnDepartment>().HasKey(s => s.DepartmentCode);
 
-            builder.Entity<LinnDepartment>().Property(s => s.DepartmentCode).HasColumnName("DEPARTMENT_CODE").HasMaxLength(10);
-            builder.Entity<LinnDepartment>().Property(s => s.Description).HasColumnName("DESCRIPTION").HasMaxLength(50);
-            builder.Entity<LinnDepartment>().Property(s => s.PersonnelDept).HasColumnName("PERSONNEL_DEPARTMENT").HasMaxLength(1);
+            builder.Entity<LinnDepartment>().Property(s => s.DepartmentCode)
+                .HasColumnName("DEPARTMENT_CODE").HasMaxLength(10);
+            builder.Entity<LinnDepartment>().Property(s => s.Description)
+                .HasColumnName("DESCRIPTION").HasMaxLength(50);
+            builder.Entity<LinnDepartment>().Property(s => s.PersonnelDept)
+                .HasColumnName("PERSONNEL_DEPARTMENT").HasMaxLength(1);
             builder.Entity<LinnDepartment>().Property(s => s.DateClosed).HasColumnName("DATE_CLOSED");
         }
     }
