@@ -1,9 +1,6 @@
 Description: LinnappsUi
 AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
-  targetCluster:
-    Type: String
-    Description: ECS Cluster name within which this application should be run
   dockerTag:
     Type: String
     Description: Docker tag to deploy
@@ -43,12 +40,27 @@ Parameters:
   loggingMaxInnerExceptionDepth:
     Type: Number
     Description: Logging Max Inner Exception Depth
-  desiredCount:
-    Type: String
-    Description: Desired number of instances
   environmentSuffix:
     Type: String
+    AllowedValues:
+      - ''
+      - -int
+      - -sys
     Description: Environment suffix e.g -int -sys
+  TestClusterName:
+    Type: AWS::SSM::Parameter::Value<String>
+    Description: Name of test cluster
+    Default: TestClusterName
+  ProductionClusterName:
+    Type: AWS::SSM::Parameter::Value<String>
+    Description: Name of production cluster
+    Default: ProductionClusterName
+
+Conditions:
+  isTesting: !Or
+    - !Equals [!Ref environmentSuffix, "-int"]
+    - !Equals [!Ref environmentSuffix, "-sys"]
+
 Resources:
   linnappsUiRole:
     Type: AWS::IAM::Role
@@ -120,8 +132,13 @@ Resources:
   linnappsUiService:
     Type: AWS::ECS::Service
     Properties:
-      Cluster: !Ref targetCluster
-      DesiredCount: !Ref desiredCount
+      # Have to use long form conditional
+      Cluster: !If
+        - isTesting
+        - !Sub ${TestClusterName}
+        - !Sub ${ProductionClusterName}
+      # Following values originally defined in deploy.sh. Only run 1 in prod too.
+      DesiredCount: !If [ isTesting, 1, 1]
       TaskDefinition: !Ref linnappsUiTaskDefinition
       Role: ecsServiceRole
       LoadBalancers:
